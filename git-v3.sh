@@ -1,18 +1,11 @@
 #!/bin/bash
-#set -e
 
-##################################################################################################################
-#
-#   DO NOT JUST RUN THIS. EXAMINE AND JUDGE. RUN AT YOUR OWN RISK.
-#
-##################################################################################################################
+echo "Deleting the work folder if one exists"
+[ -d work ] && rm -rf work
 
 # checking if I have the latest files from github
 echo "Checking for newer files online first"
 git pull
-
-cd x86_64
-sh update.sh
 
 # Below command will backup everything inside the project folder
 git add --all .
@@ -30,20 +23,9 @@ git commit -m "$input"
 
 # Push the local files to github
 
-if grep -q main .git/config; then
-	echo "Using main"
-	git push -u origin main
-fi	
+git push -u origin master
 
-if grep -q master .git/config; then
-	echo "Using main"
-	git push -u origin master
-fi
-	
-
-#git push -u origin main
-#git push -u origin master
 
 echo "################################################################"
 echo "###################    Git Push Done      ######################"
-echo "################################################################"  
+echo "################################################################"
